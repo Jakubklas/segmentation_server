@@ -116,11 +116,11 @@ def segment_image(image_path: str, mask_generator: SAM2AutomaticMaskGenerator) -
     print(f"Filtered out {len(masks) - len(non_background_masks)} likely background masks")
     print(f"Remaining masks: {len(non_background_masks)}")
 
-    # Sort by area and select top 5
+    # Sort by area and select top 3
     masks_by_area = sorted(non_background_masks, key=lambda x: x['area'], reverse=True)
-    selected_masks = masks_by_area[:5]
+    selected_masks = masks_by_area[:3] if masks_by_area else []
 
-    print(f"\nSelected top {len(selected_masks)} objects by area:")
+    print(f"\nSelected top {len(selected_masks)} object(s) by area:")
     for i, mask in enumerate(selected_masks, 1):
         print(f"  Object {i}:")
         print(f"    Area: {mask['area']} pixels")
